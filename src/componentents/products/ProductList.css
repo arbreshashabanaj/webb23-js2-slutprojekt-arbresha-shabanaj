@@ -1,0 +1,32 @@
+
+
+
+/* ProductList.module.css */
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .product-item {
+    width: 200px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #a71c1c;
+    background-color: #af0909;
+  }
+  
+  .product-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-item h4 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .product-item p {
+    margin: 0;
+  }
+  
