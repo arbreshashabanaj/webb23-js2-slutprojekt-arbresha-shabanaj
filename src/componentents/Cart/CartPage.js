@@ -4,25 +4,23 @@
 
 
 
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import styles from './CartPage.css';
+// import products from '../product/products'; // Kommenterad ut för att undvika varning om oanvänd variabel
 
 const CartPage = ({ cart, onCheckout, onClearCart }) => {
   const [purchased, setPurchased] = useState(false); 
 
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
-
+  
   useEffect(() => {
     if (purchased) {
       const redirect = setTimeout(() => {
         setPurchased(false);
-       
+        console.log("hej hej");
         window.location.href = '/products';
-      }, 2000); 
+      }, 3000);
+      
       return () => clearTimeout(redirect);
     }
   }, [purchased]);
@@ -36,6 +34,9 @@ const CartPage = ({ cart, onCheckout, onClearCart }) => {
   };
 
   const handleCheckout = () => {
+    cart.map((product) => (
+        localStorage.setItem(product.name, localStorage.getItem(product.name) - product.quantity)
+    ));
     setPurchased(true);
   };
 
@@ -58,4 +59,12 @@ const CartPage = ({ cart, onCheckout, onClearCart }) => {
 };
 
 export default CartPage;
+
+    
+
+
+
+
+
+
 

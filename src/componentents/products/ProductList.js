@@ -1,30 +1,40 @@
 
 
-
-
-
-
+ 
 
 import React, { useState } from 'react';
 import styles from './ProductList.css';
 
-import image1 from '../image/1.jpg' 
-import image2 from '../image/2.jpg'
-import image3 from '../image/3.jpg'
-import image4 from '../image/4.jpg'
-import image5 from '../image/5.jpg'
-import image6 from '../image/6.jpg'  // Ändra filtypen till din bildtyp
+import image1 from '../image/1.jpg';
+import image2 from '../image/2.jpg';
+import image3 from '../image/3.jpg';
+import image4 from '../image/4.jpg';
+import image5 from '../image/5.jpg';
+import image6 from '../image/6.jpg';
+
+const readLocalstorageForStock = (product) => {
+  console.log(product.name + "  :  productname");
+  if (localStorage.getItem(product.name) === null) {
+    localStorage.setItem(product.name, 100);
+  }
+  console.log("read localstorage för stock amount!!!!");
+  console.log(localStorage.getItem("product1"));
+
+  return localStorage.getItem(product.name);
+};
 
 const ProductList = ({ products, addToCart }) => {
-  const initialProducts = products.map((product) => ({ ...product, stock: 100 }));
+  const initialProducts = products.map((product) => ({ ...product, stock: readLocalstorageForStock(product) }));
   const [stock, setStock] = useState(initialProducts);
 
   const handleAddToCart = (product) => {
-    const updatedStock = stock.map((p) =>
-      p.id === product.id ? { ...p, stock: p.stock - 1 } : p
-    );
-    setStock(updatedStock);
-    addToCart(product);
+    if (product.stock > 0) {
+      const updatedStock = stock.map((p) =>
+        p.id === product.id ? { ...p, stock: p.stock - 1 } : p
+      );
+      setStock(updatedStock);
+      addToCart(product);
+    }
   };
 
   const handleClearCart = () => {
@@ -49,19 +59,12 @@ const ProductList = ({ products, addToCart }) => {
           <button onClick={() => handleAddToCart(product)}>Lägg till i kundvagnen</button>
         </div>
       ))}
-      <button onClick={handleClearCart}>Clear Cart</button> {/* Använd handleClearCart här */}
+      <button onClick={handleClearCart}>Clear Cart</button>
     </div>
   );
 };
 
 export default ProductList;
-
-
- 
-
-
-
-
 
 
 

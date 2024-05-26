@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navigation from './componentents/Navigation/Navigation'; 
 import ProductList from './componentents/products/ProductList'; 
 import CartPage from './componentents/Cart/CartPage'; 
 import products from './componentents/product/products'; 
+
+
 
 function App() {
   const [productList, setProducts] = useState(products);
@@ -20,25 +22,28 @@ function App() {
     }
     setCart(updatedCart);
 
-    const updatedProducts = productList.map((p) =>
+    const updatedProducts = productList.map((p) => 
       p.id === product.id ? { ...p, stock: p.stock - 1 } : p
     );
+
+    
     setProducts(updatedProducts);
   };
 
-  const removeFromCart = (productId) => {
+  /*  const removeFromCart = (productId) => {
     const updatedCart = cart.filter((item) => item.id !== productId);
     setCart(updatedCart);
 
-    const updatedProducts = productList.map((p) =>
+     const updatedProducts = productList.map((p) =>
       p.id === productId ? { ...p, stock: p.stock + 1 } : p
-    );
+    ); 
     setProducts(updatedProducts);
-  };
-
+  }; 
+   */
   const clearCart = () => {
     setCart([]);
-    setCurrentPage('products'); 
+    setCurrentPage('products');  
+   
   };
 
   const navigateToPage = (page) => {
@@ -53,96 +58,17 @@ function App() {
 
   return (
     <div className="App">
+
       <Navigation cartItems={cart.length} navigate={navigateToPage} />
       {currentPage === 'products' ? (
         <ProductList products={productList} addToCart={addToCart} />
       ) : (
-        <CartPage cart={cart} removeFromCart={removeFromCart} onClearCart={clearCart} />
+        <CartPage cart={cart} onClearCart={clearCart} />
+       // <CartPage cart={cart} removeFromCart={removeFromCart} onClearCart={clearCart} />
       )}
     </div>
   );
 }
 
-export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default App;    
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,11 @@
+.footer {
+    background-color: #df1111;
+    padding: 1px;
+    font-size: 7px; /* Ändra teckenstorlek efter behov */
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  
